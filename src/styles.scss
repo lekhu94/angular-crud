@@ -1,1 +1,112 @@
 /* You can add global styles to this file, and also import other style files */
+body, html{
+    margin: 0;
+    padding: 0;
+}
+body {
+    font-family: 'Roboto', sans-serif;
+}
+button {
+    background: #1976d2;
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 21px;
+    font-size: 14px;
+    text-transform: uppercase;
+    margin: 0 4px;
+    letter-spacing: 0.4px;
+    cursor: pointer;
+    outline: none;
+    &.danger {
+        background: #dd0031;
+    }
+    &.default {
+        background: #a2a2a2;
+    }
+}
+.error {
+    color: #dd0031;
+    text-align: center;
+}
+.warning {
+    color: #1976d2;
+    text-align: center;
+}
+* {
+    box-sizing: border-box;
+}
+.spinner {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba($color: #fff, $alpha: 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+    span {
+        height: 50px;
+        width: 50px;
+        border-radius: 100%;
+        border: 5px solid #ddd;
+        border-top: 5px solid #3498db;
+        animation: spin 1s linear infinite;
+    }
+}
+
+@keyframes spin {
+    0% {transform: rotate(0deg);}
+    100% {transform: rotate(360deg);}
+}
+.model {
+    .content {
+        padding: 15px;
+        background: #fff;
+        z-index: 1;
+        position: absolute;
+        left: 0;
+        right: 0;
+        margin: auto;
+        max-width: 400px;
+        border-radius: 4px;
+        text-align: center;
+        transform: translate(0, -50%);
+        top: 50%;
+        h4 {
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            span {
+                background: #dd0031;
+                color: #fff;
+                padding: 8px;
+                border-radius: 100%;
+                height: 30px;
+                width: 30px;
+                cursor: pointer;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 18px;
+            }
+        }
+    }
+    .overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        display: block;
+        background: #000;
+        opacity: 0.5;
+    }
+}
+.d-flex {
+    display: flex;
+    align-items: center;
+}

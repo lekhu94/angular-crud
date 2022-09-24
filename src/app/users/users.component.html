@@ -1,0 +1,74 @@
+<section class="users" cellspacing="0">
+    <h1>Users
+        <button type="button" title="Add User" routerLink="add">Add New</button>
+    </h1>
+    <div class="filter">
+        <div>
+            <input type="text" placeholder="Search by name or email" class="control" #input>
+        </div>
+        <div>
+            <div class="d-flex">
+                <div class="pagination">
+                    <span (click)="paginate('index', num)" [title]=" num+1  " *ngFor="let num of pagination" [ngClass]="{'active': pageIndex == num}">{{num+1}}</span>
+                </div>
+                <div>Items per page:
+                    <select class="control" (change)="paginate('limit', $event)">
+                        <option value="3">3</option>
+                        <option value="5">5</option>
+                        <option value="7">7</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="table-holder">
+        <table>
+            <thead>
+                <th>Sr. No.</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Action</th>
+            </thead>
+            <tbody>
+                <tr *ngFor="let user of users; index as index">
+                    <td>{{index+1}}.</td>
+                    <td>{{user?.firstName +' '+ user?.lastName | titlecase}}</td>
+                    <td>{{user?.email}}</td>
+                    <td>{{user?.phone}}</td>
+                    <td>
+                        <button type="button" title="Edit User" [routerLink]="user?.id">Edit</button>
+                        <button type="button" class="danger" title="Delete User" (click)="deleteItem(user?.id)">Delete</button>
+                    </td>
+                </tr>
+                <tr *ngIf="errorMsg">
+                    <td colspan="5" class="error">
+                        {{errorMsg}}
+                    </td>
+                </tr>
+                <tr *ngIf="users.length == 0 && !errorMsg">
+                    <td colspan="5" class="warning">
+                        No results found.
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="spinner" *ngIf="isLoader">
+            <span></span>
+        </div>
+    </div>
+</section>
+
+<div class="model" *ngIf="isModel">
+    <div class="content">
+        <h4>Are you sure? <span title="close" (click)="closeModel()">x</span></h4>
+        <p>Are you sure you want to delete?</p>
+        <div class="buttons">
+            <button type="button" class="default" title="Cancel" (click)="closeModel()">Cancel</button>
+            <button type="button" title="Yes" (click)="onConfirm()">Yes</button>
+        </div>
+    </div>
+    <span class="overlay"></span>
+</div>
+
+<app-alert *ngIf="isAlert" [message]="'Deleted successfully'" [type]="'success'"></app-alert>
